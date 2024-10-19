@@ -1,5 +1,5 @@
 
-@import "styles/base";
+@use "styles/base" as baseStyles;
 
 .App {
   &-header{
@@ -10,15 +10,15 @@
   &-content{
     padding: 1rem 4rem;
     h3{
-      color: $primary-color;
+      color: baseStyles.$primary-color;
     }
     p{
-      color: $secondary-color;
+      color: baseStyles.$secondary-color;
     }
     .bye-bye{
       margin: 4rem 0 0;
       text-align: center;
-      background: $terciary-color;
+      background: baseStyles.$terciary-color;
       border: 1px solid #ddd;
       color: #ababab;
       padding: 1rem;
