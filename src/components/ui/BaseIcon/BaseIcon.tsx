@@ -7,6 +7,7 @@ type Props = {
   iconName: IconName
   size?: SizeVariant
   color?: Color
+  className?: string
 }
 
 const SIZE_MAP: Record<SizeVariant, string> = {
@@ -19,6 +20,7 @@ export default function BaseIcon({
   iconName,
   size = 'md',
   color = 'current',
+  className,
 }: Props) {
   const svgIconStyle = {
     width: SIZE_MAP[size],
@@ -28,7 +30,11 @@ export default function BaseIcon({
   const colorClass = FILL_COLORS[color]
 
   return (
-    <div aria-label={iconName} role="img" className="w-fit">
+    <div
+      aria-label={iconName}
+      role="img"
+      className={['w-fit', className].join(' ')}
+    >
       {createElement(ICONS[iconName], {
         style: svgIconStyle,
         className: colorClass,
