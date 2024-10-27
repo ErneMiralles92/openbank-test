@@ -1,4 +1,4 @@
-import { useMemo, type InputHTMLAttributes } from 'react'
+import { useMemo, useState, type InputHTMLAttributes } from 'react'
 import BaseIcon from '../BaseIcon'
 import type { IconName } from '@/types'
 
@@ -26,6 +26,8 @@ export default function BaseInput({
   value,
   ...propsRest
 }: Props) {
+  const [focused, setFocused] = useState(false)
+
   const hasError = errorMessages && errorMessages?.length > 0
   const inputWrapperClasses = useMemo(() => {
     let classes =
@@ -57,6 +59,8 @@ export default function BaseInput({
           value={value}
           disabled={disabled}
           maxLength={maxLength}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           {...propsRest}
         />
         {appendIcon ? (
@@ -67,6 +71,9 @@ export default function BaseInput({
           />
         ) : null}
       </div>
+      {focused ? (
+        <div className="relative h-1 w-14 -mt-1 bg-[#f59e0b]"></div>
+      ) : null}
       <div className="h-5	grid grid-cols-2">
         {hasError ? (
           <div className="text-sm text-error">{errorMessages[0]}</div>
