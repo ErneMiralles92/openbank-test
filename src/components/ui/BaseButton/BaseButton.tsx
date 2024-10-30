@@ -19,7 +19,7 @@ const commonClasses =
   'py-2 px-3 rounded-sm font-bold focus:outline-none focus-visible:outline-none'
 
 const disabledClasses: Record<ButtonVariant, string> = {
-  filled: 'bg-black/25 text-black/50 cursor-not-allowed',
+  filled: 'bg-black/10 text-black/50 cursor-not-allowed',
   text: 'text-black/50 cursor-not-allowed',
 }
 

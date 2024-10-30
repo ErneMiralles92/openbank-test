@@ -43,11 +43,11 @@ export default function BaseInput({
   }, [hasError, disabled])
 
   return (
-    <div className={className}>
+    <div className={`flex flex-col ${className}`}>
       {label ? (
         <label
           htmlFor={id}
-          className={`font-bold ${disabled ? 'text-grey' : ''}`}
+          className={`font-bold mb-1 text-sm ${disabled ? 'text-grey' : ''}`}
         >
           {label}
         </label>
