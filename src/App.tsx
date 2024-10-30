@@ -1,13 +1,39 @@
 import OpenbankLogo from './assets/img/key_openbank.png'
 import Step1 from './views/ProductInformation'
-import Step2 from './views/Form'
+import Step2 from './views/CreatePasswordForm'
 import Step3 from './views/Feedback'
 import './App.scss'
+import { useState } from 'react'
+import BaseStepper from '@/components/ui/BaseStepper'
+import { useTranslation } from 'react-i18next'
 
 function App() {
+  const [activeStep, setActiveStep] = useState(1)
+
+  const { t } = useTranslation()
+  const steps = [
+    {
+      title: t('stepper.title'),
+      content: <Step1 />,
+    },
+    {
+      title: t('stepper.title'),
+      content: <Step2 />,
+    },
+  ]
   return (
     <div className="App">
       <main className="App-content">
+        <BaseStepper
+          className="max-w-3xl my-4 mx-auto"
+          activeStep={activeStep}
+          title={steps[activeStep].title}
+          length={steps.length}
+          onClickBack={() => setActiveStep(step => step - 1)}
+          onClickNext={() => setActiveStep(step => step + 1)}
+        >
+          {steps[activeStep].content}
+        </BaseStepper>
         <h1>
           Bienvenid@ al test de{' '}
           <img
@@ -40,7 +66,6 @@ function App() {
         <ul>
           <li>
             <h4>1º Pantalla de información de la contraseña</h4>
-            <Step1 />
             <p>
               En esta pantalla el usuario que entra a la aplicación debe
               entender que está contratando. Deberias darle la bienvenida al
@@ -59,7 +84,6 @@ function App() {
           </li>
           <li>
             <h4>2º Pantalla de creación de la contraseña</h4>
-            <Step2 />
             <p>
               En esta pantalla al usuario se le van a pedir los siguientes datos
               en un formulario.

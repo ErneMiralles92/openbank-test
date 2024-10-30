@@ -2,18 +2,14 @@
 @use "styles/base" as baseStyles;
 
 .App {
-  &-header{
-    &-logo{
-     max-width: 80px;
-    }
-  }
   &-content{
     padding: 1rem 4rem;
     h3{
-      color: baseStyles.$primary-color;
+      color: baseStyles.$secondary-color;
     }
     p{
       color: baseStyles.$secondary-color;
+     @apply text-sm font-medium;
     }
     .bye-bye{
       margin: 4rem 0 0;
