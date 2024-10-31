@@ -23,6 +23,12 @@ export default {
     createPassword: 'Crea tu contraseña maestra',
     repeatPassword: 'Repite tu contraseña maestra',
     createHint: 'Crea tu pista para recordar tu contraseña (opcional)',
+    errors: {
+      required: 'El campo es requerido.',
+      between: 'Debe tener entre {{min}} y {{max}} caracteres.',
+      pattern: 'Debe contener un dígito y una letra mayúscula.',
+      differentPassword: 'Las contraseñas no coinciden.',
+    },
   },
   feedback: {
     success: {

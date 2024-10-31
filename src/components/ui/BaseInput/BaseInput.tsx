@@ -7,10 +7,11 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   appendOnClick?: () => void
   className?: string
   disabled?: boolean
-  errorMessages?: string[]
+  error?: string
   id: string
   label?: string
   maxLength?: number
+  showCounter?: boolean
   value: string | number
 }
 
@@ -19,20 +20,20 @@ export default function BaseInput({
   appendOnClick,
   className,
   disabled,
-  errorMessages,
+  error,
   id,
   label,
   maxLength,
+  showCounter = false,
   value,
   ...propsRest
 }: Props) {
   const [focused, setFocused] = useState(false)
 
-  const hasError = errorMessages && errorMessages?.length > 0
   const inputWrapperClasses = useMemo(() => {
     let classes =
       'flex items-center h-10 border border-black/25 hover:border-black/40 has-[:focus]:border-black rounded'
-    if (hasError)
+    if (error)
       classes +=
         ' border border-error/50 hover:border-error/70 has-[:focus]:border-error text-error'
     if (disabled)
@@ -40,7 +41,7 @@ export default function BaseInput({
         ' has-[:disabled]:bg-grey/30 has-[:disabled]:border-grey/30 has-[:disabled]:pointer-events-none has-[:disabled]:text-grey'
 
     return classes
-  }, [hasError, disabled])
+  }, [error, disabled])
 
   return (
     <div className={`flex flex-col ${className}`}>
@@ -74,11 +75,9 @@ export default function BaseInput({
       {focused ? (
         <div className="relative h-1 w-14 -mt-1 bg-[#f59e0b]"></div>
       ) : null}
-      <div className="h-5	grid grid-cols-2">
-        {hasError ? (
-          <div className="text-sm text-error">{errorMessages[0]}</div>
-        ) : null}
-        {maxLength ? (
+      <div className="h-5	grid">
+        {error ? <div className="text-xs text-error">{error}</div> : null}
+        {maxLength && showCounter ? (
           <div className="col-start-2 text-sm text-black/60 justify-self-end">{`${String(value).length ?? 0}/${maxLength}`}</div>
         ) : null}
       </div>

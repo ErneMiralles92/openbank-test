@@ -23,6 +23,12 @@ export default {
     createPassword: 'Create your master password',
     repeatPassword: 'Repeat your master password',
     createHint: 'Create your hint to remember your password (optional)',
+    errors: {
+      required: 'Field is required.',
+      between: 'Must be between {min} and {max} characters.',
+      pattern: 'Must contain a digit and a capital letter.',
+      differentPassword: 'Passwords do not match.',
+    },
   },
   feedback: {
     success: {

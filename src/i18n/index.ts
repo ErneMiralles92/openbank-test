@@ -9,8 +9,6 @@ const resources = {
 }
 
 const { language } = window.navigator
-console.log({ language })
-
 const browserLanguage = language.split('-')[0]
 
 i18n.use(initReactI18next).init({
