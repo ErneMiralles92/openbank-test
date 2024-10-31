@@ -1,7 +1,6 @@
 import { createElement } from 'react'
 import img1 from '../../assets/img/group.svg'
 import img2 from '../../assets/img/group-3.svg'
-import step from './step1.png'
 import { useTranslation } from 'react-i18next'
 
 export default function Step1() {
