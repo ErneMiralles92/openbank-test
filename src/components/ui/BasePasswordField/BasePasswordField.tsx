@@ -1,11 +1,14 @@
 import BaseInput from '@/components/ui/BaseInput'
-import type { ComponentProps } from 'react'
+import { forwardRef, type ComponentProps } from 'react'
 import { usePasswordField } from './usePasswordField'
 
 type Props = ComponentProps<typeof BaseInput>
 
-export default function BasePasswordField(props: Props) {
+export default forwardRef<HTMLInputElement, Props>(function BasePasswordField(
+  props: Props,
+  ref
+) {
   const passwordFieldProps = usePasswordField()
 
-  return <BaseInput {...passwordFieldProps} {...props} />
-}
+  return <BaseInput ref={ref} {...passwordFieldProps} {...props} />
+})

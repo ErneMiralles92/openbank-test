@@ -1,69 +1,14 @@
-import OpenbankLogo from './assets/img/key_openbank.png'
-import Step1 from './views/ProductInformation'
-import Step2 from './views/CreatePasswordForm'
 import Step3 from './views/Feedback'
 import './App.scss'
-import { useState } from 'react'
-import BaseStepper from '@/components/ui/BaseStepper'
-import { useTranslation } from 'react-i18next'
 import { FormProvider } from './components/FormProvider'
+import CreatePassword from './CreatePassword'
 
 function App() {
-  const [activeStep, setActiveStep] = useState(1)
-
-  const { t } = useTranslation()
-  const steps = [
-    {
-      title: t('stepper.title'),
-      content: <Step1 />,
-    },
-    {
-      title: t('stepper.title'),
-      content: <Step2 />,
-    },
-  ]
   return (
-    <FormProvider>
-      <div className="App">
-        <main className="App-content">
-          <BaseStepper
-            className="max-w-3xl my-4 mx-auto"
-            activeStep={activeStep}
-            title={steps[activeStep].title}
-            length={steps.length}
-            onClickBack={() => setActiveStep(step => step - 1)}
-            onClickNext={() => setActiveStep(step => step + 1)}
-          >
-            {steps[activeStep].content}
-          </BaseStepper>
-          <h1>
-            Bienvenid@ al test de{' '}
-            <img
-              src={OpenbankLogo}
-              className="App-header-logo"
-              alt={'openbank-logo'}
-            />
-          </h1>
-          <h3>Objetivo </h3>
-          <p>
-            Lo que pretendemos con la prueba es evaluar las capacidades técnicas
-            respecto a un desarrollador web o front, especialmente en el area de
-            React y aplicaciones SPA. Con esta prueba se pretende valorar muchos
-            aspectos del stack tecnologico de un desarrollador del ambito web,
-            como arquitectura, uso de patrones de diseño, maquetación, técnicas
-            de programación, documentación, conocimentos de Javascript, HTML y
-            CSS, entre otros.{' '}
-          </p>
-          <h3>¿En que consiste?</h3>
-          <p>
-            La prueba consiste en diseñar, maquetar y desarrollar desde cero un
-            pequeño wizard que simule algo tan típico como la creación de una
-            contraseña para un usuario. Lo que queremos que hagas es que
-            plantees un wizard de unos 3 pasos en los que un usuario reciba
-            información de que está a punto de crear una contraseña nueva, un
-            formulario donde se le pidan una serie de datos para la creación de
-            la contraseña y una página final de feedback de la operación.
-          </p>
+    <div className="App">
+      <main className="App-content">
+        <FormProvider>
+          <CreatePassword />
           <h3>Desarrollo</h3>
           <ul>
             <li>
@@ -174,9 +119,9 @@ function App() {
             Sin más que añadir, ¡mucha suerte! y cualquier duda, mandanos tus
             dudas al correo que te han dado. =)
           </h4>
-        </main>
-      </div>
-    </FormProvider>
+        </FormProvider>
+      </main>
+    </div>
   )
 }
 

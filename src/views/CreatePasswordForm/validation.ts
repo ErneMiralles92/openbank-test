@@ -9,7 +9,8 @@ const matchPattern = (value: string) => {
   return value.match(/^(?=.*[A-Z])(?=.*\d).+$/)
 }
 
-export const passwordValidation = (value: string) => {
+export const passwordValidation = (rawValue: string) => {
+  const value = rawValue.trim()
   if (!value) return i18n.t('form.errors.required')
 
   if (!isBetween(value, MIN_LENGTH, MAX_LENGTH)) {
@@ -23,7 +24,8 @@ export const passwordValidation = (value: string) => {
 }
 
 export const repeatPasswordValidation = (password: string) => {
-  return (value: string) => {
+  return (rawValue: string) => {
+    const value = rawValue.trim()
     if (!value) return i18n.t('form.errors.required')
     console.log({ value, password })
 

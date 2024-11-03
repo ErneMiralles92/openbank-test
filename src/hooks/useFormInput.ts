@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, FocusEventHandler } from 'react'
+import type { ChangeEventHandler, FocusEventHandler, RefCallback } from 'react'
 import { useState } from 'react'
 import { useFormContext } from '@/hooks/useFormContext'
 
@@ -13,26 +13,35 @@ export function useFormInput({
 }) {
   const [value, setValue] = useState(initialValue)
 
-  const { setTouched, setErrors, errors } = useFormContext() ?? {}
+  const { setTouched, setErrors, errors, touched, inputRefs, errorsRef } =
+    useFormContext() ?? {}
+
+  const validate = () => {
+    const error = validation && validation(value)
+    setErrors(state => ({ ...state, [name]: error ?? '' }))
+    errorsRef.current = { ...errorsRef.current, [name]: error ?? '' }
+  }
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { value } = e.target
     setValue(value)
-    const error = validation && validation(value)
-    console.log({ error })
-
-    setErrors(state => ({ ...state, [name]: error ?? '' }))
+    validate()
   }
 
-  const handleFocus: FocusEventHandler<HTMLInputElement> = () => {
+  const handleBlur: FocusEventHandler<HTMLInputElement> = () => {
     setTouched(state => ({ ...state, [name]: true }))
+    validate()
   }
+
+  const refHandler: RefCallback<HTMLInputElement> = el =>
+    el && inputRefs.current.push(el)
 
   const inputProps = {
     onChange: handleChange,
-    onFocus: handleFocus,
+    onBlur: handleBlur,
     value: value,
-    error: errors[name],
+    error: touched[name] ? errors[name] : '',
+    ref: refHandler,
   }
 
   return inputProps

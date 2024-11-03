@@ -1,4 +1,4 @@
-import { useMemo, useState, type InputHTMLAttributes } from 'react'
+import { forwardRef, useMemo, useState, type InputHTMLAttributes } from 'react'
 import BaseIcon from '../BaseIcon'
 import type { IconName } from '@/types'
 
@@ -15,19 +15,23 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value: string | number
 }
 
-export default function BaseInput({
-  appendIcon,
-  appendOnClick,
-  className,
-  disabled,
-  error,
-  id,
-  label,
-  maxLength,
-  showCounter = false,
-  value,
-  ...propsRest
-}: Props) {
+export default forwardRef<HTMLInputElement, Props>(function BaseInput(
+  {
+    appendIcon,
+    appendOnClick,
+    className,
+    disabled,
+    error,
+    id,
+    label,
+    maxLength,
+    showCounter = false,
+    value,
+    onBlur,
+    ...propsRest
+  },
+  ref
+) {
   const [focused, setFocused] = useState(false)
 
   const inputWrapperClasses = useMemo(() => {
@@ -61,7 +65,11 @@ export default function BaseInput({
           disabled={disabled}
           maxLength={maxLength}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          ref={ref}
+          onBlur={e => {
+            setFocused(false)
+            onBlur && onBlur(e)
+          }}
           {...propsRest}
         />
         {appendIcon ? (
@@ -83,4 +91,4 @@ export default function BaseInput({
       </div>
     </div>
   )
-}
+})

@@ -30,11 +30,12 @@ export default function CreatePasswordForm() {
           className="col-span-1 md:col-span-5"
           value={passwordInput.value}
           onChange={passwordInput.onChange}
-          onFocus={passwordInput.onFocus}
+          onBlur={passwordInput.onBlur}
           error={passwordInput.error}
           required
           minLength={MIN_LENGTH}
           maxLength={MAX_LENGTH}
+          ref={passwordInput.ref}
         />
         <BasePasswordField
           id="repeatPassword"
@@ -42,11 +43,12 @@ export default function CreatePasswordForm() {
           className="col-span-1 md:col-span-5"
           value={repeatPasswordInput.value}
           onChange={repeatPasswordInput.onChange}
-          onFocus={repeatPasswordInput.onFocus}
+          onBlur={repeatPasswordInput.onBlur}
           error={repeatPasswordInput.error}
           required
           minLength={MIN_LENGTH}
           maxLength={MAX_LENGTH}
+          ref={repeatPasswordInput.ref}
         />
       </div>
       <p className="mt-6">{t('form.subtitleHint')}</p>

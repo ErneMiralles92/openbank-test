@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 import { createContext } from 'react'
 
 type FormContext = {
@@ -6,6 +6,9 @@ type FormContext = {
   setTouched: Dispatch<SetStateAction<Record<string, boolean>>>
   errors: Record<string, string>
   setErrors: Dispatch<SetStateAction<Record<string, string>>>
+  inputRefs: MutableRefObject<HTMLInputElement[]>
+  errorsRef: MutableRefObject<Record<string, string>>
+  validate: () => boolean
 }
 
 export const FormContext = createContext<FormContext | null>(null)
