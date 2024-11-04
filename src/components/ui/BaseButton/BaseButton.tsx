@@ -29,7 +29,6 @@ function getButtonClass({
   variant: ButtonVariant
   color: Color
   disabled: boolean
-  loading: boolean
 }) {
   if (disabled) return disabledClasses[variant]
   if (variant === 'filled') {
@@ -50,7 +49,7 @@ export default function BaseButton({
   children,
   ...restProps
 }: Props) {
-  const buttonClass = `${getButtonClass({ variant, color, disabled, loading })} ${commonClasses}`
+  const buttonClass = `${getButtonClass({ variant, color, disabled })} ${commonClasses}`
 
   return (
     <button
