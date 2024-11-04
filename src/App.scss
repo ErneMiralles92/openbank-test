@@ -3,7 +3,7 @@
 
 .App {
   &-content{
-    padding: 1rem 4rem;
+    @apply py-4 px-2 md:px-16;
     h3{
       color: baseStyles.$secondary-color;
     }

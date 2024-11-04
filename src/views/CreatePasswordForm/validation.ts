@@ -27,8 +27,6 @@ export const repeatPasswordValidation = (password: string) => {
   return (rawValue: string) => {
     const value = rawValue.trim()
     if (!value) return i18n.t('form.errors.required')
-    console.log({ value, password })
-
     if (value !== password) {
       return i18n.t('form.errors.differentPassword')
     }

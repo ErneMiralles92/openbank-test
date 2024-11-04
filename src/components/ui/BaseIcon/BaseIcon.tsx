@@ -15,6 +15,7 @@ const SIZE_MAP: Record<SizeVariant, string> = {
   sm: '1rem',
   md: '1.5rem',
   lg: '2rem',
+  xl: '2.5rem',
 }
 
 export default function BaseIcon({

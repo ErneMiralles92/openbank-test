@@ -1,10 +1,8 @@
 import type { ReactNode, HTMLAttributes } from 'react'
-import type { Color, IconName } from '@/types'
+import type { ButtonVariant, Color, IconName } from '@/types'
 import BaseIcon from '@/components/ui/BaseIcon'
 import { exhaustiveCheck } from '@/helpers'
 import { BACKGROUND_COLORS, TEXT_COLORS } from '@/constants/colors'
-
-type ButtonVariant = 'filled' | 'text'
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant

@@ -2,29 +2,38 @@ import { useEffect, type ReactNode } from 'react'
 import BaseStepperHeader from './BaseStepperHeader'
 import BaseButton from '@/components/ui/BaseButton'
 import { useTranslation } from 'react-i18next'
+import type { ButtonVariant, Color } from '@/types'
 
 type Props = {
   activeStep?: number
   children?: ReactNode
   className?: string
-  length: number
-  title?: string
   disabledBack?: boolean
+  hideBackButton?: boolean
+  length: number
   loadingNextButton?: boolean
-  onClickNext?: (...arg: unknown[]) => void
+  nextButtonColor?: Color
+  nextButtonText?: string
+  nextButtonVariant?: ButtonVariant
   onClickBack?: (...arg: unknown[]) => void
+  onClickNext?: (...arg: unknown[]) => void
+  title?: string
 }
 
 export default function BaseStepper({
   activeStep = 0,
   children,
   className,
+  disabledBack = false,
   length,
-  title,
+  loadingNextButton = false,
+  nextButtonColor,
+  hideBackButton = false,
+  nextButtonText,
+  nextButtonVariant,
   onClickBack,
   onClickNext,
-  disabledBack = false,
-  loadingNextButton = false,
+  title,
 }: Props) {
   const { t } = useTranslation()
   useEffect(() => {
@@ -45,7 +54,7 @@ export default function BaseStepper({
         <div className="bg-white py-3 mt-8">{children}</div>
       </div>
       <div className="border-t border-t-secondary/10 py-5 px-3 md:px-20 flex">
-        {activeStep > 0 ? (
+        {activeStep > 0 && !hideBackButton ? (
           <BaseButton
             variant="text"
             color="secondary"
@@ -57,13 +66,13 @@ export default function BaseStepper({
         ) : null}
         <div className="flex-grow" />
         <BaseButton
-          variant="filled"
-          color="secondary"
+          variant={nextButtonVariant ?? 'filled'}
+          color={nextButtonColor ?? 'secondary'}
           iconName="ArrowRight"
           onClick={() => onClickNext && onClickNext()}
           loading={loadingNextButton}
         >
-          {t('stepper.next')}
+          {nextButtonText ?? t('stepper.next')}
         </BaseButton>
       </div>
     </div>
