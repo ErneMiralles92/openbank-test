@@ -5,11 +5,14 @@ import Step3 from './views/Feedback'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useFormContext } from './hooks/useFormContext'
+import { submitForm } from '@/services/api'
 
 export default function CreatePasswordManager() {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(1)
-  const { validate } = useFormContext() ?? {}
+  const { fieldsRef, validate } = useFormContext() ?? {}
+  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const goToPreviousStep = () => {
     setActiveStep(step => step - 1)
@@ -27,14 +30,23 @@ export default function CreatePasswordManager() {
     {
       title: t('stepper.title'),
       content: <Step2 />,
-      onClickNext: () => {
+      onClickNext: async () => {
         const isValid = validate()
         if (!isValid) return
+        setLoading(true)
+        const { password } = fieldsRef.current
+        try {
+          await submitForm(password)
+          setSuccess(true)
+        } catch (error) {
+          setSuccess(false)
+        }
+        setLoading(false)
         goToNextStep()
       },
     },
     {
-      content: <Step3 />,
+      content: <Step3 success={success} />,
     },
   ]
 
@@ -46,6 +58,8 @@ export default function CreatePasswordManager() {
       length={steps.length}
       onClickBack={goToPreviousStep}
       onClickNext={steps[activeStep].onClickNext}
+      disabledBack={loading}
+      loadingNextButton={loading}
     >
       {steps[activeStep].content}
     </BaseStepper>

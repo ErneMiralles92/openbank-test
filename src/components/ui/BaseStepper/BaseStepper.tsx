@@ -9,7 +9,8 @@ type Props = {
   className?: string
   length: number
   title?: string
-  disabledNextButton?: boolean
+  disabledBack?: boolean
+  loadingNextButton?: boolean
   onClickNext?: (...arg: unknown[]) => void
   onClickBack?: (...arg: unknown[]) => void
 }
@@ -22,7 +23,8 @@ export default function BaseStepper({
   title,
   onClickBack,
   onClickNext,
-  disabledNextButton = false,
+  disabledBack = false,
+  loadingNextButton = false,
 }: Props) {
   const { t } = useTranslation()
   useEffect(() => {
@@ -40,13 +42,14 @@ export default function BaseStepper({
           </>
         ) : null}
 
-        <div className="min-h-80 bg-white py-3 mt-8">{children}</div>
+        <div className="bg-white py-3 mt-8">{children}</div>
       </div>
       <div className="border-t border-t-secondary/10 py-5 px-3 md:px-20 flex">
         {activeStep > 0 ? (
           <BaseButton
             variant="text"
             color="secondary"
+            disabled={disabledBack}
             onClick={() => onClickBack && onClickBack()}
           >
             {t('stepper.back')}
@@ -58,7 +61,7 @@ export default function BaseStepper({
           color="secondary"
           iconName="ArrowRight"
           onClick={() => onClickNext && onClickNext()}
-          disabled={disabledNextButton}
+          loading={loadingNextButton}
         >
           {t('stepper.next')}
         </BaseButton>

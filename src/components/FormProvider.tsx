@@ -6,6 +6,7 @@ export function FormProvider({ children }: { children: ReactNode }) {
   const [errors, setErrors] = useState({})
   const errorsRef = useRef<Record<string, string>>({})
   const inputRefs = useRef<HTMLInputElement[]>([])
+  const fieldsRef = useRef<Record<string, string>>({})
 
   const validate = () => {
     inputRefs.current.forEach(input => {
@@ -23,6 +24,7 @@ export function FormProvider({ children }: { children: ReactNode }) {
       value={{
         errors,
         errorsRef,
+        fieldsRef,
         inputRefs,
         setErrors,
         setTouched,

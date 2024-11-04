@@ -9,6 +9,7 @@ type FormContext = {
   inputRefs: MutableRefObject<HTMLInputElement[]>
   errorsRef: MutableRefObject<Record<string, string>>
   validate: () => boolean
+  fieldsRef: MutableRefObject<Record<string, string>>
 }
 
 export const FormContext = createContext<FormContext | null>(null)

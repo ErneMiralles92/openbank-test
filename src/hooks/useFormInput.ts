@@ -13,8 +13,15 @@ export function useFormInput({
 }) {
   const [value, setValue] = useState(initialValue)
 
-  const { setTouched, setErrors, errors, touched, inputRefs, errorsRef } =
-    useFormContext() ?? {}
+  const {
+    setTouched,
+    setErrors,
+    errors,
+    touched,
+    inputRefs,
+    errorsRef,
+    fieldsRef,
+  } = useFormContext() ?? {}
 
   const validate = () => {
     const error = validation && validation(value)
@@ -25,6 +32,7 @@ export function useFormInput({
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { value } = e.target
     setValue(value)
+    fieldsRef.current = { ...fieldsRef.current, [name]: value }
     validate()
   }
 
