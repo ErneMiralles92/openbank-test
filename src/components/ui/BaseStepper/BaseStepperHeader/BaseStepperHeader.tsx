@@ -34,7 +34,10 @@ export default function BaseStepperHeader({ activeStep, length }: Props) {
                   className={`h-1 w-10 ${activeStep >= index ? 'bg-primary' : 'bg-secondary/50'}`}
                 />
               ) : null}
-              <span className={stepIndicatorClasses(index)}>
+              <span
+                data-testid="step-indicator"
+                className={stepIndicatorClasses(index)}
+              >
                 {activeStep > index ? (
                   <BaseIcon size="sm" iconName="Checkmark" />
                 ) : (

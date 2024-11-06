@@ -24,7 +24,6 @@ export default function CreatePasswordForm() {
     <form>
       <p>{t('form.subtitlePassword')}</p>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 mt-6 items-end">
-        passwordInput.value {passwordInput.value}
         <BasePasswordField
           id="password"
           dataTestId="password"
