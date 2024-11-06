@@ -6,6 +6,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   appendIcon?: IconName
   appendOnClick?: () => void
   className?: string
+  dataTestId?: string
   disabled?: boolean
   error?: string
   id: string
@@ -28,6 +29,7 @@ export default forwardRef<HTMLInputElement, Props>(function BaseInput(
     showCounter = false,
     value,
     onBlur,
+    dataTestId,
     ...propsRest
   },
   ref
@@ -48,7 +50,7 @@ export default forwardRef<HTMLInputElement, Props>(function BaseInput(
   }, [error, disabled])
 
   return (
-    <div className={`flex flex-col ${className}`}>
+    <div data-testid={dataTestId} className={`flex flex-col ${className}`}>
       {label ? (
         <label
           htmlFor={id}
