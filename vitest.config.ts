@@ -9,7 +9,7 @@ export default mergeConfig(
       globals: true,
       clearMocks: true,
       environment: 'jsdom',
-      include: ['**/*.spec.{ts,tsx}'],
+      include: ['**/*.test.{ts,tsx}'],
       setupFiles: ['./vitest/setup.ts'],
     },
   })
